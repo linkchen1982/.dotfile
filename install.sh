@@ -7,8 +7,8 @@ echo ">>> Source nix:"
 echo ">>> Install packages:"
 nix-env -iA \
 	nixpkgs.git \
-  nixpkgs.neovim \
-  nixpkgs.yarn \
+	nixpkgs.neovim \
+	nixpkgs.yarn \
 	nixpkgs.antibody \
 	nixpkgs.tmux \
 	nixpkgs.stow \
@@ -19,14 +19,14 @@ nix-env -iA \
 	nixpkgs.direnv \
 
 echo ">>> Stow:"
-stow git
-stow zsh
-stow nvim
+stow git --adopt
+stow zsh --adopt
+stow nvim --adopt
 
 echo ">>> Add zsh to valid login shells:"
 command -v zsh | sudo tee -a /etc/shells
 
 echo ">>> Use zsh as default shell:"
-sudo chsh -s $(which zsh) $USER 
+sudo chsh -s $(which zsh) $(whoami)
 
 antibody bundle <~/.zsh_plugins.txt> ~/.zsh_plugins.sh
